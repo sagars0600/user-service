@@ -25,6 +25,12 @@ public class UserController {
       return  new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+        User user = userService.getuserById(userId);
+        return new ResponseEntity(user, HttpStatus.CREATED);
+
+    }
 
 
 
