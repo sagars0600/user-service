@@ -22,4 +22,12 @@ public class UserService {
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
+
+
+    public User getuserById(String userId) {
+        User user = userRepository.findById(userId).get();
+        return user;
+    }
+
+
 }
