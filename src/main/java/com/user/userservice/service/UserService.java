@@ -14,13 +14,20 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public String deleteUserById(String userId){
+        userRepository.deleteById(userId);
+        return "User Deleted Successfully";
+    }
 
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
 
+
     public User getuserById(String userId) {
         User user = userRepository.findById(userId).get();
         return user;
     }
+
+
 }
