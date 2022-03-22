@@ -13,8 +13,13 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
     public String deleteUserById(String userId){
         userRepository.deleteById(userId);
         return "User Deleted Successfully";
+    }
+
+    public List<User> getAllUser(){
+        return userRepository.findAll();
     }
 }
