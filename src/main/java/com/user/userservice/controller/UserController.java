@@ -38,15 +38,12 @@ public class UserController {
 
 
 
-
     @GetMapping("/users/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
         User user = userService.getuserById(userId);
         return new ResponseEntity(user, HttpStatus.CREATED);
 
     }
-
-
 
 
     @DeleteMapping("/users/{userId}")
