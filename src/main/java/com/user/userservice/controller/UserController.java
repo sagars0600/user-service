@@ -2,6 +2,7 @@ package com.user.userservice.controller;
 
 
 import com.user.userservice.model.User;
+import com.user.userservice.model.UserDto;
 import com.user.userservice.repo.UserRepository;
 import com.user.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +22,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
 
 
 
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers(){
-      List<User> list=  userService.getAllUser();
-      return  new ResponseEntity<>(list, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<UserDto>> getallUsers(@QueryParam("page") Integer page, @QueryParam("pageSize") Integer pageSize){
+        return  new ResponseEntity<>(userService.allUser(page,pageSize), HttpStatus.ACCEPTED);
     }
 
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable("userId")  String userId) throws Exception {
         return new ResponseEntity(userService.update(user,userId),HttpStatus.ACCEPTED);
     }
 
 
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
         User user = userService.getuserById(userId);
         return new ResponseEntity(user, HttpStatus.CREATED);
@@ -58,14 +59,14 @@ public class UserController {
 
 
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<User> getAllUsers(@RequestBody User user){
         User users=  userService.addUser(user);
         return  new ResponseEntity<>(users, HttpStatus.OK);
     }
 
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUserById(@PathVariable("userId") String userId){
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.ACCEPTED);
     }
