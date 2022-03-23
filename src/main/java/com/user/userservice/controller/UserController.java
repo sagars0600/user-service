@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.ws.rs.QueryParam;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -49,7 +50,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
-        User user = userService.getuserById(userId);
+        Optional<User> user = userService.getuserById(userId);
         return new ResponseEntity(user, HttpStatus.CREATED);
 
     }

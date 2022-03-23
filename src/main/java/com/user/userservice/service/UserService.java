@@ -1,5 +1,6 @@
 package com.user.userservice.service;
 
+import com.user.userservice.exception.UserNotFoundException;
 import com.user.userservice.model.User;
 import com.user.userservice.model.UserDto;
 import com.user.userservice.repo.UserRepository;
@@ -15,6 +16,7 @@ import java.util.Date;
 import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -65,11 +67,12 @@ public class UserService {
     }
 
 
-    public User getuserById(String userId) {
-        User user = userRepository.findById(userId).get();
-        return user;
+    public Optional<User> getuserById(String userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(!user.isPresent())
+            throw new UserNotFoundException("Please check the ID");
+        else return user;
     }
-
 
 
 
