@@ -13,6 +13,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+
+    public User addUser(User user){
+        return userRepository.save(user);
+    }
+
     public String deleteUserById(String userId){
         userRepository.deleteById(userId);
         return "User Deleted Successfully";
@@ -38,7 +44,5 @@ public class UserService {
         User user = userRepository.findById(userId).get();
         return user;
     }
-
-
 
 }
