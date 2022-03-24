@@ -74,6 +74,14 @@ public class UserService {
         else return user;
     }
 
+    public User userEmail(String email){
+        if(userRepository.findEmail(email)!=null){
+            return userRepository.findEmail(email);
+        }
+        else{
+            throw new UserNotFoundException("Email Exception not found");
+        }
+    }
 
 
 }

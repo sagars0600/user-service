@@ -71,6 +71,10 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable("userId") String userId){
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.ACCEPTED);
     }
+    @GetMapping("/getUserByEmail/{emailId}")
+    public ResponseEntity<User> userByEmail(@PathVariable("emailId") String emailId){
+        return new ResponseEntity<>(userService.userEmail(emailId),HttpStatus.ACCEPTED);
+    }
 
 
 }
