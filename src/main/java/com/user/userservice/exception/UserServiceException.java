@@ -1,4 +1,5 @@
 package com.user.userservice.exception;
+import com.user.userservice.model.ApiError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserServiceException extends RuntimeException {
     @ExceptionHandler({UserNotFoundException.class})
     ResponseEntity customerNotFoundHandler(Exception exception, ServletWebRequest request) {
-        com.user.userservice.exception.ApiError apiError = new com.user.userservice.exception.ApiError();
+     ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.NOT_FOUND);
         apiError.setErrors(Arrays.asList(exception.getMessage()));
         apiError.setPath(request.getDescription(false));
@@ -30,7 +31,7 @@ public class UserServiceException extends RuntimeException {
         List<String> errors = fieldErrors.stream()
                 .map(err -> err.getField() + " : " + err.getDefaultMessage())
                 .collect(Collectors.toList());
-        com.user.userservice.exception.ApiError apiError = new com.user.userservice.exception.ApiError();
+        ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.BAD_REQUEST);
         apiError.setTimestamp(LocalDateTime.now());
         apiError.setPath(request.getDescription(false));

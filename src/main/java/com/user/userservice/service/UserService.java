@@ -36,9 +36,30 @@ public class UserService {
         return "User Deleted Successfully";
     }
 
-    public List<UserDto> allUser(Integer page,Integer pageSize) {
+    public UserDto findID(String userId) {
+        try {
+            User user=userRepository.findById(userId).get();
+            UserDto userDTO=new UserDto();
+            userDTO.setUserId(user.getUserId());
+            userDTO.setFirstName(user.getFirstName());
+            userDTO.setLastName(user.getLastName());
+            userDTO.setMiddleName(user.getMiddleName());
+            userDTO.setPhoneNumber(user.getPhoneNumber());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setAddress(user.getAddress());
+            userDTO.setDateOfBirth(user.getDateOfBirth());
+            userDTO.setEmployeeNumber(user.getEmployeeNumber());
+            userDTO.setBloodGroup(user.getBloodGroup().toString());
+            userDTO.setGender(user.getGender().toString());
+            return userDTO;
+        } catch (Exception e) {
+            throw new UserNotFoundException("User Not Found Exception");
+        }
+    }
+
+    public List<UserDto> (Integer page,Integer pageSize) {
         if (page == null) {
-            page = 1;
+            page = 1;allUser
         }
         if (pageSize == null) {
             pageSize = 10;
@@ -67,16 +88,16 @@ public class UserService {
     }
 
 
-    public Optional<User> getuserById(String userId) {
-        Optional<User> user = userRepository.findById(userId);
-        if(!user.isPresent())
-            throw new UserNotFoundException("Please check the ID");
-        else return user;
-    }
+//    public Optional<User> getuserById(String userId) {
+//        Optional<User> user = userRepository.findById(userId);
+//        if(!user.isPresent())
+//            throw new UserNotFoundException("Please check the ID");
+//        else return user;
+//    }
 
     public User userEmail(String email){
-        if(userRepository.findEmail(email)!=null){
-            return userRepository.findEmail(email);
+        if(userRepository.findByemail(email)!=null){
+            return userRepository.findByemail(email);
         }
         else{
             throw new UserNotFoundException("Email Exception not found");

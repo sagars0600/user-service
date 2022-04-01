@@ -3,8 +3,8 @@ package com.user.userservice.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -14,11 +14,12 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "users")
+//@Document(collection = "users")
 @Data
+@ToString
 public class UserDto {
     @Id
-    private String userID;
+    private String userId;
     @NotEmpty(message = "First name is required")
     private String firstName;
     @NotEmpty(message = "Middle name is required")

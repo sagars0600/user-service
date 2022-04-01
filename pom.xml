@@ -87,6 +87,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>Docker-User</finalName>
 	</build>
 
 </project>

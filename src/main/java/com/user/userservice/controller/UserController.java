@@ -3,7 +3,6 @@ package com.user.userservice.controller;
 
 import com.user.userservice.model.User;
 import com.user.userservice.model.UserDto;
-import com.user.userservice.repo.UserRepository;
 import com.user.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,9 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.ws.rs.QueryParam;
 import java.util.List;
-import java.util.Optional;
 
-
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -47,13 +45,18 @@ public class UserController {
     }
 
 
-
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
-        Optional<User> user = userService.getuserById(userId);
-        return new ResponseEntity(user, HttpStatus.CREATED);
-
+    public ResponseEntity<UserDto> findID(@PathVariable("userId") String userId){
+        return new ResponseEntity<>(userService.findID(userId),HttpStatus.ACCEPTED);
     }
+
+
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId){
+//        Optional<User> user = userService.findID(userId);
+//        return new ResponseEntity(user, HttpStatus.CREATED);
+//
+//    }
 
 
 
@@ -72,7 +75,7 @@ public class UserController {
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.ACCEPTED);
     }
     @GetMapping("/getUserByEmail/{emailId}")
-    public ResponseEntity<User> userByEmail(@PathVariable("emailId") String emailId){
+    public ResponseEntity<User> findByemail(@PathVariable("emailId") String emailId){
         return new ResponseEntity<>(userService.userEmail(emailId),HttpStatus.ACCEPTED);
     }
 
