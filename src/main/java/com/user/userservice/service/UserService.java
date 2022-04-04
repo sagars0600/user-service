@@ -57,9 +57,9 @@ public class UserService {
         }
     }
 
-    public List<UserDto> (Integer page,Integer pageSize) {
+    public List<UserDto> allUser(Integer page,Integer pageSize) {
         if (page == null) {
-            page = 1;allUser
+            page = 1;
         }
         if (pageSize == null) {
             pageSize = 10;

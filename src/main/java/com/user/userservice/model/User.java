@@ -26,13 +26,14 @@ public class User {
     @NotEmpty(message = "Last Name is required")
     private String lastName;
 
+
     @NotEmpty(message = "Phone Number is required")
     private String phoneNumber;
 
     @NotEmpty(message = "Gender is required")
     private String gender;
 
-    @NotEmpty(message = "Marital Status is required")
+    @NotEmpty(message = "address Status is required")
     private String address;
 
     @NotNull
@@ -47,4 +48,7 @@ public class User {
     private String email;
     private String password;
 
+
+    public User(String userId, String nikil, String ma, String n, String phoneNumber, String male, String keny, String s, String employeeNumber, String bloodGroup, String email, String password) {
+    }
 }
