@@ -1,54 +1,56 @@
 package com.user.userservice.model;
 
+import com.user.userservice.constfile.ConstFiles;
+import com.user.userservice.enums.BloodGroup;
+import com.user.userservice.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "users")
 @Data
+@ToString
 public class User {
     @Id
     private String userId;
 
-    @NotEmpty(message = "First Name is required")
+    @NotNull(message = ConstFiles.firstName)
     private String firstName;
-
+    @NotNull(message = ConstFiles.middleName)
     private String middleName;
 
-    @NotEmpty(message = "Last Name is required")
+    @NotEmpty(message = ConstFiles.lastName)
     private String lastName;
 
 
-    @NotEmpty(message = "Phone Number is required")
+    @NotEmpty(message = ConstFiles.phoneNumber)
+
+    @Size(min=10,max = 10)
     private String phoneNumber;
 
-    @NotEmpty(message = "Gender is required")
-    private String gender;
+    private Gender gender;
 
-    @NotEmpty(message = "address Status is required")
+    @NotEmpty(message = ConstFiles.address)
     private String address;
 
-    @NotNull
     private Date dateOfBirth;
 
+    @NotEmpty(message=ConstFiles.employeeNumber)
     private String employeeNumber;
 
-    @NotEmpty(message = "Blood Group  is required")
-    private String bloodGroup;
+    private BloodGroup bloodGroup;
 
-    @NotEmpty(message = "Email is required")
+    @NotEmpty(message = ConstFiles.email)
     private String email;
+
+    @NotNull(message = ConstFiles.password)
     private String password;
-
-
-    public User(String userId, String nikil, String ma, String n, String phoneNumber, String male, String keny, String s, String employeeNumber, String bloodGroup, String email, String password) {
-    }
 }

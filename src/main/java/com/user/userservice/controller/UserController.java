@@ -35,12 +35,13 @@ public class UserController {
 
     @GetMapping()
     public ResponseEntity<List<UserDto>> getallUsers(@QueryParam("page") Integer page, @QueryParam("pageSize") Integer pageSize){
+
         return  new ResponseEntity<>(userService.allUser(page,pageSize), HttpStatus.ACCEPTED);
     }
 
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> update(@Valid @RequestBody User user, @PathVariable("userId")  String userId) throws Exception {
+    public ResponseEntity<UserDto> update(@Valid @RequestBody User user, @PathVariable("userId")  String userId) throws Exception {
         return new ResponseEntity(userService.update(user,userId),HttpStatus.ACCEPTED);
     }
 
@@ -52,8 +53,8 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> getAllUsers(@RequestBody User user){
-        User users=  userService.addUser(user);
+    public ResponseEntity<UserDto> getAllUsers( @Valid @RequestBody User user){
+        UserDto users=  userService.addUser(user);
         return  new ResponseEntity<>(users, HttpStatus.OK);
     }
 
@@ -63,9 +64,8 @@ public class UserController {
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.ACCEPTED);
     }
     @GetMapping("/getUserByEmail/{emailId}")
-    public ResponseEntity<User> findByemail(@PathVariable("emailId") String emailId){
+    public ResponseEntity<User> userByEmail(@PathVariable("emailId") String emailId){
         return new ResponseEntity<>(userService.userEmail(emailId),HttpStatus.ACCEPTED);
     }
-
 
 }
