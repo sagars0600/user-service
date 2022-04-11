@@ -23,18 +23,7 @@ public class UserService {
             throw new UserNotFoundException(ConstFiles.emails);
         }
         userRepository.save(user);
-        UserDto userDTO = new UserDto();
-        userDTO.setUserId(user.getUserId());
-        userDTO.setFirstName(user.getFirstName());
-        userDTO.setLastName(user.getLastName());
-        userDTO.setMiddleName(user.getMiddleName());
-        userDTO.setPhoneNumber(user.getPhoneNumber());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setAddress(user.getAddress());
-        userDTO.setDateOfBirth(user.getDateOfBirth());
-        userDTO.setEmployeeNumber(user.getEmployeeNumber());
-        userDTO.setBloodGroup(user.getBloodGroup());
-        userDTO.setGender(user.getGender());
+        UserDto userDTO = userDt(user);
         return userDTO;
     }
 
@@ -52,23 +41,29 @@ public class UserService {
     public UserDto findID(String userId) {
         try {
             User user = userRepository.findById(userId).get();
-            UserDto userDTO = new UserDto();
-            userDTO.setUserId(user.getUserId());
-            userDTO.setFirstName(user.getFirstName());
-            userDTO.setLastName(user.getLastName());
-            userDTO.setMiddleName(user.getMiddleName());
-            userDTO.setPhoneNumber(user.getPhoneNumber());
-            userDTO.setEmail(user.getEmail());
-            userDTO.setAddress(user.getAddress());
-            userDTO.setDateOfBirth(user.getDateOfBirth());
-            userDTO.setEmployeeNumber(user.getEmployeeNumber());
-            userDTO.setBloodGroup(user.getBloodGroup());
-            userDTO.setGender(user.getGender());
+            UserDto userDTO = userDt(user);
             return userDTO;
         } catch (Exception e) {
             throw new UserNotFoundException(ConstFiles.errorCode);
         }
     }
+
+    public UserDto userDt(User user){
+        UserDto userDTO = new UserDto();
+        userDTO.setUserId(user.getUserId());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setMiddleName(user.getMiddleName());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setAddress(user.getAddress());
+        userDTO.setDateOfBirth(user.getDateOfBirth());
+        userDTO.setEmployeeNumber(user.getEmployeeNumber());
+        userDTO.setBloodGroup(user.getBloodGroup());
+        userDTO.setGender(user.getGender());
+        return userDTO;
+    }
+
 
     public List<UserDto> allUser(Integer page, Integer pageSize) {
         if (page == null) {
@@ -92,18 +87,7 @@ public class UserService {
     public UserDto update(User user, String userId) throws Exception {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.save(user);
-                UserDto userDTO = new UserDto();
-                userDTO.setUserId(user.getUserId());
-                userDTO.setFirstName(user.getFirstName());
-                userDTO.setLastName(user.getLastName());
-                userDTO.setMiddleName(user.getMiddleName());
-                userDTO.setPhoneNumber(user.getPhoneNumber());
-                userDTO.setEmail(user.getEmail());
-                userDTO.setAddress(user.getAddress());
-                userDTO.setDateOfBirth(user.getDateOfBirth());
-                userDTO.setEmployeeNumber(user.getEmployeeNumber());
-                userDTO.setBloodGroup(user.getBloodGroup());
-                userDTO.setGender(user.getGender());
+            UserDto userDTO = userDt(user);
                 return userDTO;
         } else {
             throw new UserNotFoundException(ConstFiles.errorCode);
